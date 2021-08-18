@@ -1,7 +1,9 @@
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import { Input } from "../components/Utils/Input";
 import { Button } from "../components/Utils/Button";
+import { Form } from "../components/Utils/Form";
 
 interface loginProps {}
 
@@ -45,23 +47,23 @@ const Login: React.FC<loginProps> = () => {
     <LoginContainer>
       <LoginHeader>Login Page</LoginHeader>
       <Form onSubmit={handleSubmit}>
-        <Label>Username: </Label>
+        <p>Username: </p>
         <Input
           type="text"
           value={username}
-          onChange={(e) => {
+          onChange={(e: any) => {
             setUsername(e.target.value);
           }}
         ></Input>
-        <Label>Password:</Label>
+        <p>Password:</p>
         <Input
           type="password"
           value={password}
-          onChange={(e) => {
+          onChange={(e: any) => {
             setPassword(e.target.value);
           }}
         ></Input>
-        <Button type="submit" value="Submit" />
+        <Button value="Submit">Log In</Button>
       </Form>
     </LoginContainer>
   );
@@ -75,17 +77,4 @@ const LoginContainer = styled.div`
 `;
 const LoginHeader = styled.h3`
   padding: 2rem;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  min-width: 250px;
-`;
-
-const Label = styled.label`
-  margin-top: 0.5rem;
-`;
-const Input = styled.input`
-  margin-bottom: 0.5rem;
 `;

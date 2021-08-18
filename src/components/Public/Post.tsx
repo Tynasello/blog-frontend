@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { Button } from "../Utils/Button";
+import { Form } from "../Utils/Form";
+import { Input } from "../Utils/Input";
+import { TextInput } from "../Utils/TextInput";
 
 interface PostProps {}
 
@@ -20,6 +24,8 @@ interface Comment {
 }
 export const Post: React.FC<PostProps> = () => {
   const [comments, setComments] = useState<[]>([]);
+  const [newCommentAuthor, setNewCommentAuthor] = useState("");
+  const [newCommentText, setNewCommentText] = useState("");
 
   const location = useLocation<LocationState>();
   const title = location.state.title;
@@ -52,8 +58,28 @@ export const Post: React.FC<PostProps> = () => {
       }
     })();
   }, [id]);
-  console.log(comments);
 
+  const handleNewComment = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    try {
+      await fetch(
+        `https://tynasello-blog-api.herokuapp.com/blog/posts/${id}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            text: newCommentText,
+            author_name: newCommentAuthor,
+          }),
+        }
+      );
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <PostContainer>
       <Title>{title}</Title>
@@ -62,6 +88,27 @@ export const Post: React.FC<PostProps> = () => {
       <Text>{text}</Text>
       <CommentsContainer>
         <CommentsHeader>Comments</CommentsHeader>
+        <NewCommentContainer>
+          <Form onSubmit={handleNewComment}>
+            <p>Author Name:</p>
+            <Input
+              type="text"
+              value={newCommentAuthor}
+              onChange={(e: any) => {
+                setNewCommentAuthor(e.target.value);
+              }}
+            ></Input>
+            <p>Text:</p>
+            <TextInput
+              type="text"
+              value={newCommentText}
+              onChange={(e: any) => {
+                setNewCommentText(e.target.value);
+              }}
+            ></TextInput>
+            <Button value="Submit">Post Comment</Button>
+          </Form>
+        </NewCommentContainer>
         {comments &&
           comments.map((comment: Comment) => {
             return (
@@ -96,3 +143,5 @@ const CommentDiv = styled.div`
 `;
 const CommentAuthor = styled.h6``;
 const CommentText = styled.p``;
+
+const NewCommentContainer = styled.div``;

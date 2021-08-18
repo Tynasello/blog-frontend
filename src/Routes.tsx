@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import { AdminPosts } from "./pages/Admin/Posts";
 import { PublicPosts } from "./pages/Public/Posts";
 import { Post as PublicPost } from "./components/Public/Post";
+import { Post as AdminPost } from "./components/Admin/Post";
 
 interface RoutesProps {}
 
@@ -45,6 +46,10 @@ export const Routes: React.FC<RoutesProps> = () => {
 
         <Route exact path="/posts/:id">
           <PublicPost />
+        </Route>
+
+        <Route exact path="/admin/posts/:id">
+          <AdminPost />
         </Route>
 
         {/* Logout */}
