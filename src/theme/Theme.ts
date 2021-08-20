@@ -4,18 +4,19 @@ const Theme = {
   colors: {
     light: "#ECF0F1",
     lightGray: "#D0D3D4",
+    darkGray: "#363537",
 
     green: "#28B463",
     red: "#E74C3C",
 
-    darkGray: "#363537",
-    mainColor: "#00d084",
-    gunmetal: "#293241",
+    main: "#3D5A6C",
+    secondary: "#75B9BE",
+
+    fontColor: "#2A2D34",
   },
   fonts: {
-    mainHeaderFont: "'Bangers', cursive",
-    headerFont: "'Poppins', sans-serif;",
-    bodyFont: "'Open Sans', sans-serif;",
+    header: "'Poppins', sans-serif;",
+    body: "'Open Sans', sans-serif;",
   },
 };
 

@@ -1,11 +1,16 @@
+/*--------------------------------------------------------------*/
+
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { ThemeProvider } from "styled-components";
 import Theme from "./theme/Theme";
 import GlobalStyle from "./theme/GlobalStyle";
+
+import App from "./App";
+
+/*--------------------------------------------------------------*/
 
 ReactDOM.render(
   <React.StrictMode>

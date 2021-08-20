@@ -1,8 +1,14 @@
+/*--------------------------------------------------------------*/
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import { PostPreview } from "../../components/Public/PostPreview";
 
+/*--------------------------------------------------------------*/
+
 interface PublicPostsProps {}
+
 interface Post {
   title: string;
   date: string;
@@ -12,13 +18,19 @@ interface Post {
   text: string;
 }
 
+/*--------------------------------------------------------------*/
+
 export const PublicPosts: React.FC<PublicPostsProps> = () => {
-  const [posts, setPosts] = useState<[]>([]);
+  // Posts array from db
+  const [posts, setPosts] = useState([]);
 
   // Run effect and clean up only once (on mount and unmount)
   useEffect(() => {
+    // (async()=>{})(); to get async function in useEffect
     (async () => {
       try {
+        // GET
+        // posts request to API
         const req = await fetch(
           `https://tynasello-blog-api.herokuapp.com/blog/posts`,
           {
@@ -29,11 +41,12 @@ export const PublicPosts: React.FC<PublicPostsProps> = () => {
           }
         );
 
-        let res = await req.json();
+        let result = await req.json();
         if (req.status !== 200) {
           return;
         }
-        const postsArr: any = Object.values(res);
+        // Get values from result and set posts equal to the first index of said values
+        const postsArr: any = Object.values(result);
         setPosts(postsArr[0]);
       } catch (err) {
         console.log(err);
@@ -43,7 +56,10 @@ export const PublicPosts: React.FC<PublicPostsProps> = () => {
 
   return (
     <PostsContainer>
+      {/* -------------------------------------------------------------- */}
+
       {posts &&
+        // If there are posts, map each post to a PostPreview component with appropriate props
         posts.map((post: Post) => {
           return (
             <PostPreview
@@ -56,13 +72,18 @@ export const PublicPosts: React.FC<PublicPostsProps> = () => {
             />
           );
         })}
+
+      {/* -------------------------------------------------------------- */}
     </PostsContainer>
   );
 };
 
 const PostsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 3rem;
-  padding: 3rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 4rem;
+
+  width: 70vw;
+  margin: 0 auto;
+  padding: 3rem 0;
 `;

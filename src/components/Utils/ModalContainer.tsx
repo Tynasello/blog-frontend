@@ -1,12 +1,19 @@
+/*--------------------------------------------------------------*/
+
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import { Button } from "./Button";
 import { Modal } from "./Modal";
+
+/*--------------------------------------------------------------*/
 
 interface ModalContainerProps {
   buttonText: string;
   children: any;
 }
+
+/*--------------------------------------------------------------*/
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   buttonText,
@@ -24,4 +31,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
     </ModalContainerDiv>
   );
 };
+
+/*--------------------------------------------------------------*/
+
 const ModalContainerDiv = styled.div``;

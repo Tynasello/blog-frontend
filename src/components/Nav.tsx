@@ -1,49 +1,77 @@
+/*--------------------------------------------------------------*/
+
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+/*--------------------------------------------------------------*/
+
 interface navProps {}
+
+/*--------------------------------------------------------------*/
 
 const Nav: React.FC<navProps> = () => {
   return (
     <NavContainer>
-      <NavLink to="/" href="#">
-        Home
-      </NavLink>
+      {/* -------------------------------------------------------------- */}
 
-      <NavLink to="/admin" aria-current="page" href="#">
-        Admin
-      </NavLink>
+      <NavContent>
+        <NavLink to="/" href="#">
+          Home
+        </NavLink>
 
-      <NavLink
-        onClick={() => {
-          localStorage.clear();
-          window.location.reload();
-        }}
-        to=""
-      >
-        Log Out
-      </NavLink>
+        {/* -------------------------------------------------------------- */}
+
+        <NavLink to="/admin" aria-current="page" href="#">
+          Admin
+        </NavLink>
+
+        {/* -------------------------------------------------------------- */}
+
+        <NavLink
+          onClick={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+          to="/admin"
+        >
+          Log Out
+        </NavLink>
+
+        {/* -------------------------------------------------------------- */}
+      </NavContent>
     </NavContainer>
   );
 };
 export default Nav;
 
+/*--------------------------------------------------------------*/
+
 const NavContainer = styled.nav`
   display: flex;
   flex-direction: row;
+
+  background-color: ${({ theme }) => theme.colors.main};
+
   padding: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.gunmetal};
+`;
+const NavContent = styled.div`
+  width: 70vw;
+  margin: 0 auto;
 `;
 const NavLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.light};
+
   list-style: none;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.light};
+
   padding: 0 0.6rem;
+
   &:hover {
+    color: ${({ theme }) => theme.colors.lightGray};
     text-decoration: none;
     list-style: none;
-    color: ${({ theme }) => theme.colors.lightGray};
+
     transform: scale(1.02);
   }
 `;

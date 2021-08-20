@@ -1,10 +1,16 @@
+/*--------------------------------------------------------------*/
+
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Button } from "../Utils/Button";
+
 import { Form } from "../Utils/Form";
 import { Input } from "../Utils/Input";
-import { ModalContainer } from "../Utils/ModalContainer";
 import { TextInput } from "../Utils/TextInput";
+import { Button } from "../Utils/Button";
+import { ModalContainer } from "../Utils/ModalContainer";
+
+/*--------------------------------------------------------------*/
+
 interface PostProps {}
 
 interface Comment {
@@ -14,6 +20,8 @@ interface Comment {
   text: string;
   _id: string;
 }
+
+/*--------------------------------------------------------------*/
 export const Post: React.FC<PostProps> = () => {
   const [comments, setComments] = useState<[]>([]);
 
@@ -24,9 +32,14 @@ export const Post: React.FC<PostProps> = () => {
   const [author, setAuthor] = useState("");
   const [date, setDate] = useState("");
 
+  /*--------------------------------------------------------------*/
+
+  // Run effect and clean up on mount, unmount, and when id changes
   useEffect(() => {
     (async () => {
       try {
+        // GET
+        // Get post in db by id
         const req = await fetch(
           `https://tynasello-blog-api.herokuapp.com/blog/posts/${id}`,
           {
@@ -37,20 +50,23 @@ export const Post: React.FC<PostProps> = () => {
           }
         );
 
-        let res = await req.json();
+        let result = await req.json();
         if (req.status !== 200) {
           return;
         }
-        res = res.post;
+        result = result.post;
 
-        setTitle(res.title);
-        setText(res.text);
-        setAuthor(res.author_name);
-        setDate(res.titldatee);
+        // Set all post atrribute variables
+        setTitle(result.title);
+        setText(result.text);
+        setAuthor(result.author_name);
+        setDate(result.date);
       } catch (err) {
         console.log(err);
       }
       try {
+        // GET
+        // Get all of the comments of current blog post
         const req = await fetch(
           `https://tynasello-blog-api.herokuapp.com/blog/posts/${id}/comments`,
           {
@@ -61,11 +77,12 @@ export const Post: React.FC<PostProps> = () => {
           }
         );
 
-        let res = await req.json();
+        let result = await req.json();
         if (req.status !== 200) {
           return;
         }
-        const commentsArr: any = Object.values(res);
+        // Get values from result and set comments equal to the first index of said values
+        const commentsArr: any = Object.values(result);
         setComments(commentsArr[0]);
       } catch (err) {
         console.log(err);
@@ -73,8 +90,14 @@ export const Post: React.FC<PostProps> = () => {
     })();
   }, [id]);
 
+  /*--------------------------------------------------------------*/
+
+  // Handle delete comment button onClick
   const handleDeleteComment = async (commentId: string) => {
     try {
+      // DELETE
+      // Pass x-access-token token from localStorage for user authentication
+      // Delete comment of current post by id
       await fetch(
         `https://tynasello-blog-api.herokuapp.com/blog/posts/${id}/comments/${commentId}`,
         {
@@ -84,15 +107,23 @@ export const Post: React.FC<PostProps> = () => {
           },
         }
       );
+      // Reload window to see comment deleted immediately
       window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
 
+  /*--------------------------------------------------------------*/
+
+  // Handle post update form submit
   const handePostUpdate = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
+      // PATCH
+      // Update post by id
+      // Pass x-access-token token from localStorage for user authentication
+      // Pass title,author, and text as body contents
       await fetch(`https://tynasello-blog-api.herokuapp.com/blog/posts/${id}`, {
         method: "PATCH",
         headers: {
@@ -102,11 +133,14 @@ export const Post: React.FC<PostProps> = () => {
         body: JSON.stringify({ title: title, author_name: author, text: text }),
       });
 
+      // Reload window to see post updated immediately
       window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
+
+  /*--------------------------------------------------------------*/
 
   return (
     <PostContainer>
@@ -115,9 +149,15 @@ export const Post: React.FC<PostProps> = () => {
       <Date>{date}</Date>
       <Text>{text}</Text>
 
+      {/* -------------------------------------------------------------- */}
+
       <ModalContainer buttonText="Edit Post">
+        <PostTitle>Edit Blog Post</PostTitle>
+        <br />
         <Form onSubmit={handePostUpdate}>
-          <p>Author Name:</p>
+          {/* -------------------------------------------------------------- */}
+
+          <p>Post Title:</p>
           <Input
             type="text"
             value={title}
@@ -125,6 +165,10 @@ export const Post: React.FC<PostProps> = () => {
               setTitle(e.target.value);
             }}
           ></Input>
+
+          {/* -------------------------------------------------------------- */}
+
+          <p>Author Name:</p>
           <Input
             type="text"
             value={author}
@@ -132,6 +176,10 @@ export const Post: React.FC<PostProps> = () => {
               setAuthor(e.target.value);
             }}
           ></Input>
+
+          {/* -------------------------------------------------------------- */}
+
+          <p>Content:</p>
           <TextInput
             type="text"
             value={text}
@@ -140,49 +188,89 @@ export const Post: React.FC<PostProps> = () => {
             }}
           ></TextInput>
 
+          {/* -------------------------------------------------------------- */}
+
           <Button value="Submit">Confirm Edit</Button>
         </Form>
       </ModalContainer>
 
+      {/* -------------------------------------------------------------- */}
+
       <CommentsContainer>
         <CommentsHeader>Comments</CommentsHeader>
 
+        {/* -------------------------------------------------------------- */}
+
         {comments &&
           comments.map((comment: Comment) => {
+            // If there are comments map each once to a CommentDiv styled div with appropriate author text and button elements
+            // Pass args, which contains only the comment id, to the Button component.
+            // args will be passed into the onClick method of the Button component
             const args = [];
             args.push(comment._id);
             return (
-              <CommentDiv key={comment._id}>
-                <CommentAuthor>{comment.author_name}</CommentAuthor>
-                <CommentText>{comment.text}</CommentText>
-                <Button onClick={handleDeleteComment} args={args}>
-                  Delete Comment
-                </Button>
-              </CommentDiv>
+              <>
+                <CommentDiv key={comment._id}>
+                  <CommentAuthor>{comment.author_name}</CommentAuthor>
+                  <CommentText>{comment.text}</CommentText>
+                  <Button onClick={handleDeleteComment} args={args}>
+                    Delete Comment
+                  </Button>
+                </CommentDiv>
+              </>
             );
           })}
+
+        {/* -------------------------------------------------------------- */}
       </CommentsContainer>
     </PostContainer>
   );
 };
+
+/*--------------------------------------------------------------*/
+
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem 4rem;
+  width: 50vw;
+  margin: 3rem auto;
+  & > * {
+    padding: 0.4rem 0;
+  }
 `;
-const Title = styled.h3``;
+const Title = styled.h3`
+  padding-bottom: 2rem;
+`;
 const Author = styled.h6``;
 const Date = styled.h6``;
 const Text = styled.p``;
-const CommentsHeader = styled.h5`
-  margin-top: 2rem;
+const CommentsHeader = styled.h4`
+  margin-top: 1rem;
 `;
-const CommentsContainer = styled.div``;
+const CommentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    padding: 0.4rem 0;
+  }
+`;
 const CommentDiv = styled.div`
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.light};
+
   padding: 1rem;
   margin: 1.5rem 0;
+
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 4px;
+
+  & > * {
+    padding: 0.2rem 0;
+  }
 `;
 const CommentAuthor = styled.h6``;
-const CommentText = styled.p``;
+const CommentText = styled.p`
+  font-size: 0.9rem;
+`;
+
+const PostTitle = styled.h3``;

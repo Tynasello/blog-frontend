@@ -1,6 +1,10 @@
+/*--------------------------------------------------------------*/
+
 import React from "react";
 import { useRouteMatch, Link } from "react-router-dom";
 import styled from "styled-components";
+
+/*--------------------------------------------------------------*/
 
 interface PostProps {
   title: string;
@@ -10,6 +14,8 @@ interface PostProps {
   id: string;
 }
 
+/*--------------------------------------------------------------*/
+
 export const PostPreview: React.FC<PostProps> = ({
   title,
   text,
@@ -17,6 +23,7 @@ export const PostPreview: React.FC<PostProps> = ({
   date,
   id,
 }) => {
+  // match with hold url for current page
   const match = useRouteMatch();
   return (
     <PostContainer>
@@ -24,7 +31,9 @@ export const PostPreview: React.FC<PostProps> = ({
       <PostAuthor>{author}</PostAuthor>
       <PostDate>{date}</PostDate>
       <Link
-        style={{ color: "#0ca1a1" }}
+        style={{ color: "#75B9BE" }}
+        // Link is to the current url / the id corresponding to a particular post
+        // Pass post attributes in through state key
         to={{
           pathname: `${match.url}/${id}`,
           state: { title, text, author, date, id },
@@ -35,7 +44,17 @@ export const PostPreview: React.FC<PostProps> = ({
     </PostContainer>
   );
 };
-const PostContainer = styled.div``;
+
+/*--------------------------------------------------------------*/
+
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    padding: 0.3rem 0;
+  }
+`;
 const PostTitle = styled.h3``;
 const PostAuthor = styled.h6``;
 const PostDate = styled.h6``;
