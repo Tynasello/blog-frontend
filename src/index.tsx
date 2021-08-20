@@ -15,7 +15,7 @@ import { HashRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter basename="/">
+    <HashRouter basename="/blog-frontend/">
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <App />
