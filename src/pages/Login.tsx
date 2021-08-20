@@ -50,7 +50,6 @@ const Login: React.FC<loginProps> = () => {
         return;
       }
 
-      <Redirect to="/posts" />;
       window.location.reload();
     } catch (err) {
       console.log(err);
