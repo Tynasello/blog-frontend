@@ -44,18 +44,14 @@ const Routes: React.FC<RoutesProps> = () => {
           <Redirect to="/posts" />
         </Route>
 
-        <Route exact path=" ">
-          <PublicPosts></PublicPosts>
-        </Route>
+        <Route exact path=" " component={PublicPosts} />
 
         {/* 
           Posts page
           Public
         */}
 
-        <Route exact path="/posts">
-          <PublicPosts></PublicPosts>
-        </Route>
+        <Route exact path="/posts" component={PublicPosts} />
 
         {/*
           Posts page
@@ -72,18 +68,14 @@ const Routes: React.FC<RoutesProps> = () => {
           Public 
         */}
 
-        <Route exact path="/posts/:id">
-          <PublicPost />
-        </Route>
+        <Route exact path="/posts/:id" component={PublicPost} />
 
         {/* 
           Route for single post 
           Admin 
         */}
 
-        <Route exact path="/admin/posts/:id">
-          <AdminPost />
-        </Route>
+        <Route exact path="/admin/posts/:id" component={AdminPost} />
       </Switch>
     </>
   );
