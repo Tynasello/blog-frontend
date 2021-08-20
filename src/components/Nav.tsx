@@ -22,7 +22,7 @@ const Nav: React.FC<navProps> = () => {
 
         {/* -------------------------------------------------------------- */}
 
-        <NavLink to="/blog-frontend/admin" aria-current="page" href="#">
+        <NavLink to="/admin" aria-current="page" href="#">
           Admin
         </NavLink>
 
@@ -33,7 +33,7 @@ const Nav: React.FC<navProps> = () => {
             localStorage.clear();
             window.location.reload();
           }}
-          to="/blog-frontend/admin"
+          to="/admin"
         >
           Log Out
         </NavLink>

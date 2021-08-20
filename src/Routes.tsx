@@ -39,12 +39,9 @@ export const Routes: React.FC<RoutesProps> = () => {
         {/* 
           Redirect to /posts
         */}
-        <Route exact path="/">
-          <Redirect to="/blog-frontend" />
-        </Route>
 
-        <Route exact path="/blog-frontend">
-          <Redirect to="/blog-frontend/posts" />
+        <Route exact path="/">
+          <Redirect to="/posts" />
         </Route>
 
         {/* 
@@ -52,7 +49,7 @@ export const Routes: React.FC<RoutesProps> = () => {
           Public
         */}
 
-        <Route exact path="/blog-frontend/posts">
+        <Route exact path="/posts">
           <PublicPosts></PublicPosts>
         </Route>
 
@@ -62,8 +59,17 @@ export const Routes: React.FC<RoutesProps> = () => {
           If user isn't authentiated display Login component
         */}
 
-        <Route exact path="/blog-frontend/admin">
-          {auth ? <AdminPosts /> : <Login />}
+        <Route exact path="/admin">
+          {auth ? <Redirect to="/admin/posts" /> : <Login />}
+        </Route>
+
+        {/*
+          Posts page
+          Admin  
+        */}
+
+        <Route exact path="/admin/posts">
+          <AdminPosts></AdminPosts>
         </Route>
 
         {/* 
@@ -71,7 +77,7 @@ export const Routes: React.FC<RoutesProps> = () => {
           Public 
         */}
 
-        <Route exact path="/blog-frontend/posts/:id">
+        <Route exact path="/posts/:id">
           <PublicPost />
         </Route>
 
@@ -80,7 +86,7 @@ export const Routes: React.FC<RoutesProps> = () => {
           Admin 
         */}
 
-        <Route exact path="/blog-frontend/admin/posts/:id">
+        <Route exact path="/admin/posts/:id">
           <AdminPost />
         </Route>
       </Switch>

@@ -83,7 +83,7 @@ export const PostPreview: React.FC<PostProps> = ({
       <Link
         style={{ color: "#0ca1a1" }}
         to={{
-          pathname: `${match.url}/posts/${id}`,
+          pathname: `${match.url}/${id}`,
         }}
       >
         See More
