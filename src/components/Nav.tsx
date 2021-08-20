@@ -16,13 +16,13 @@ const Nav: React.FC<navProps> = () => {
       {/* -------------------------------------------------------------- */}
 
       <NavContent>
-        <NavLink to="/" href="#">
+        <NavLink to="/" href="/#">
           Home
         </NavLink>
 
         {/* -------------------------------------------------------------- */}
 
-        <NavLink to="/admin" aria-current="page" href="#">
+        <NavLink to="/admin" aria-current="page" href="/#">
           Admin
         </NavLink>
 
@@ -34,6 +34,7 @@ const Nav: React.FC<navProps> = () => {
             window.location.reload();
           }}
           to="/admin"
+          href="/#"
         >
           Log Out
         </NavLink>
