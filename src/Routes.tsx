@@ -33,7 +33,7 @@ export const Routes: React.FC<RoutesProps> = () => {
   return (
     <>
       {/* Always display Nav component */}
-      <Nav />
+      <Nav setAuth={setAuth} />
 
       <Switch>
         {/* 

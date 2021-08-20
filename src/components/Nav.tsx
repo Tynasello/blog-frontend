@@ -6,35 +6,32 @@ import styled from "styled-components";
 
 /*--------------------------------------------------------------*/
 
-interface navProps {}
+interface navProps {
+  setAuth: any;
+}
 
 /*--------------------------------------------------------------*/
 
-const Nav: React.FC<navProps> = () => {
+const Nav: React.FC<navProps> = ({ setAuth }) => {
   return (
     <NavContainer>
       {/* -------------------------------------------------------------- */}
 
       <NavContent>
-        <NavLink to="/" href="/#">
-          Home
-        </NavLink>
+        <NavLink to="/">Home</NavLink>
 
         {/* -------------------------------------------------------------- */}
 
-        <NavLink to="/admin" aria-current="page" href="/#">
-          Admin
-        </NavLink>
+        <NavLink to="/admin">Admin</NavLink>
 
         {/* -------------------------------------------------------------- */}
 
         <NavLink
           onClick={() => {
+            setAuth(false);
             localStorage.clear();
-            window.location.reload();
           }}
           to="/admin"
-          href="/#"
         >
           Log Out
         </NavLink>

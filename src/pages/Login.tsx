@@ -2,7 +2,6 @@
 
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
 
 import { Form } from "../components/Utils/Form";
 import { Input } from "../components/Utils/Input";
