@@ -60,7 +60,7 @@ export const Routes: React.FC<RoutesProps> = () => {
         */}
 
         <Route exact path="/admin">
-          {auth ? <AdminPosts /> : <Login />}
+          {auth ? <AdminPosts /> : <Login setAuth={setAuth} />}
         </Route>
 
         {/* 

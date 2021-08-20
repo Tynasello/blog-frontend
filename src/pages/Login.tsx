@@ -10,11 +10,13 @@ import { Button } from "../components/Utils/Button";
 
 /*--------------------------------------------------------------*/
 
-interface loginProps {}
+interface loginProps {
+  setAuth: any;
+}
 
 /*--------------------------------------------------------------*/
 
-const Login: React.FC<loginProps> = () => {
+const Login: React.FC<loginProps> = ({ setAuth }) => {
   // Username and password for user
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,12 +47,11 @@ const Login: React.FC<loginProps> = () => {
         // Set token in localStorage equal to token recieved from POST request
         localStorage.setItem("token", result.token);
         localStorage.setItem("auth", "true");
+        setAuth(true);
       } else {
         console.log(result);
         return;
       }
-
-      window.location.reload();
     } catch (err) {
       console.log(err);
     }
