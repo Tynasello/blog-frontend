@@ -9,15 +9,18 @@ import Theme from "./theme/Theme";
 import GlobalStyle from "./theme/GlobalStyle";
 
 import App from "./App";
+import { HashRouter } from "react-router-dom";
 
 /*--------------------------------------------------------------*/
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={Theme}>
-      <GlobalStyle />
-      <App />
-    </ThemeProvider>
+    <HashRouter basename="/blog-frontend">
+      <ThemeProvider theme={Theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
