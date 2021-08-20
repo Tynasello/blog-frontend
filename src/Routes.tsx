@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------*/
 
 import React, { useEffect, useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import Nav from "./components/Nav";
 
@@ -15,7 +15,7 @@ import { Post as AdminPost } from "./components/Admin/Post";
 
 interface RoutesProps {}
 
-export const Routes: React.FC<RoutesProps> = () => {
+const Routes: React.FC<RoutesProps> = () => {
   // Boolean variable for user authentication
   const [auth, setAuth] = useState(false);
 
@@ -42,6 +42,10 @@ export const Routes: React.FC<RoutesProps> = () => {
 
         <Route exact path="/">
           <Redirect to="/posts" />
+        </Route>
+
+        <Route exact path=" ">
+          <PublicPosts></PublicPosts>
         </Route>
 
         {/* 
@@ -84,3 +88,4 @@ export const Routes: React.FC<RoutesProps> = () => {
     </>
   );
 };
+export default withRouter(Routes);

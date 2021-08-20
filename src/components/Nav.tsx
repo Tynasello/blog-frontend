@@ -18,7 +18,7 @@ const Nav: React.FC<navProps> = ({ setAuth }) => {
       {/* -------------------------------------------------------------- */}
 
       <NavContent>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/posts">Home</NavLink>
 
         {/* -------------------------------------------------------------- */}
 
