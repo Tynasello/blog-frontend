@@ -25,7 +25,7 @@ interface Comment {
 export const Post: React.FC<PostProps> = () => {
   const [comments, setComments] = useState<[]>([]);
 
-  const id = window.location.pathname.split("/").pop();
+  const id = window.location.hash.split("/").pop();
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -209,15 +209,13 @@ export const Post: React.FC<PostProps> = () => {
             const args = [];
             args.push(comment._id);
             return (
-              <>
-                <CommentDiv key={comment._id}>
-                  <CommentAuthor>{comment.author_name}</CommentAuthor>
-                  <CommentText>{comment.text}</CommentText>
-                  <Button onClick={handleDeleteComment} args={args}>
-                    Delete Comment
-                  </Button>
-                </CommentDiv>
-              </>
+              <CommentDiv key={comment._id}>
+                <CommentAuthor>{comment.author_name}</CommentAuthor>
+                <CommentText>{comment.text}</CommentText>
+                <Button onClick={handleDeleteComment} args={args}>
+                  Delete Comment
+                </Button>
+              </CommentDiv>
             );
           })}
 

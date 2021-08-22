@@ -1,7 +1,6 @@
 /*--------------------------------------------------------------*/
 
 import React, { SyntheticEvent, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import { Button } from "../Utils/Button";
@@ -13,13 +12,6 @@ import { TextInput } from "../Utils/TextInput";
 
 interface PostProps {}
 
-interface LocationState {
-  title: string;
-  text: string;
-  author: string;
-  date: string;
-  id: string;
-}
 interface Comment {
   author_name: string;
   date: string;
@@ -36,14 +28,12 @@ export const Post: React.FC<PostProps> = () => {
   const [newCommentAuthor, setNewCommentAuthor] = useState("");
   const [newCommentText, setNewCommentText] = useState("");
 
-  // useLocation hook allows access to variables in state object
-  const location = useLocation<LocationState>();
-  // Info about current post retrieved from location.state object
-  const title = location.state.title;
-  const text = location.state.text;
-  const author = location.state.author;
-  const date = location.state.date;
-  const id = location.state.id;
+  const id = window.location.hash.split("/").pop();
+
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [author, setAuthor] = useState("");
+  const [date, setDate] = useState("");
 
   /*--------------------------------------------------------------*/
 
@@ -52,7 +42,34 @@ export const Post: React.FC<PostProps> = () => {
     (async () => {
       try {
         // GET
-        // Get all comments of current post
+        // Get post in db by id
+        const req = await fetch(
+          `https://tynasello-blog-api.herokuapp.com/blog/posts/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        let result = await req.json();
+        if (req.status !== 200) {
+          return;
+        }
+        result = result.post;
+
+        // Set all post atrribute variables
+        setTitle(result.title);
+        setText(result.text);
+        setAuthor(result.author_name);
+        setDate(result.date);
+      } catch (err) {
+        console.log(err);
+      }
+      try {
+        // GET
+        // Get all of the comments of current blog post
         const req = await fetch(
           `https://tynasello-blog-api.herokuapp.com/blog/posts/${id}/comments`,
           {
@@ -75,7 +92,6 @@ export const Post: React.FC<PostProps> = () => {
       }
     })();
   }, [id]);
-
   /*--------------------------------------------------------------*/
 
   // Handle new comment form submit

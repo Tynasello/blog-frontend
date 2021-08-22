@@ -23,7 +23,7 @@ export const PostPreview: React.FC<PostProps> = ({
   date,
   id,
 }) => {
-  // match with hold url for current page
+  // match will hold url for current page
   const match = useRouteMatch();
   return (
     <PostContainer>
