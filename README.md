@@ -14,7 +14,7 @@ To be admin of this blog, login with username: "**admin**" and password: "**admi
 
 ## src Folder Structure
 
-```bash
+```
 ./src
 ├── App.tsx
 ├── Routes.tsx
