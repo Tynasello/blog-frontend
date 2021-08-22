@@ -15,6 +15,7 @@ import { HashRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* Must use HashRouter for deployment with gh-pages  */}
     <Router>
       <ThemeProvider theme={Theme}>
         <GlobalStyle />

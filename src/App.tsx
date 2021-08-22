@@ -9,6 +9,7 @@ import { Routes } from "./Routes";
 const App: React.FC = () => {
   return (
     <div className="App">
+      {/* Must use HashRouter for deployment with gh-pages  */}
       <HashRouter>
         <Routes />
       </HashRouter>
