@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------*/
 
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Routes } from "./Routes";
 
 /*--------------------------------------------------------------*/
@@ -9,9 +9,9 @@ import { Routes } from "./Routes";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Routes />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
