@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------*/
 
 import React, { useEffect, useState } from "react";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import Nav from "./components/Nav";
 
@@ -15,7 +15,7 @@ import { Post as AdminPost } from "./components/Admin/Post";
 
 interface RoutesProps {}
 
-const Routes: React.FC<RoutesProps> = () => {
+export const Routes: React.FC<RoutesProps> = () => {
   // Boolean variable for user authentication
   const [auth, setAuth] = useState(false);
 
@@ -44,14 +44,18 @@ const Routes: React.FC<RoutesProps> = () => {
           <Redirect to="/posts" />
         </Route>
 
-        <Route exact path=" " component={PublicPosts} />
+        <Route exact path=" ">
+          <PublicPosts></PublicPosts>
+        </Route>
 
         {/* 
           Posts page
           Public
         */}
 
-        <Route exact path="/posts" component={PublicPosts} />
+        <Route exact path="/posts">
+          <PublicPosts></PublicPosts>
+        </Route>
 
         {/*
           Posts page
@@ -68,16 +72,19 @@ const Routes: React.FC<RoutesProps> = () => {
           Public 
         */}
 
-        <Route exact path="/posts/:id" component={PublicPost} />
+        <Route exact path="/posts/:id">
+          <PublicPost />
+        </Route>
 
         {/* 
           Route for single post 
           Admin 
         */}
 
-        <Route exact path="/admin/posts/:id" component={AdminPost} />
+        <Route exact path="/admin/posts/:id">
+          <AdminPost />
+        </Route>
       </Switch>
     </>
   );
 };
-export default withRouter(Routes);

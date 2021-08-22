@@ -98,7 +98,7 @@ export const Post: React.FC<PostProps> = () => {
         }
       );
       // Reload window to display new comment
-      // window.location.reload();
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
