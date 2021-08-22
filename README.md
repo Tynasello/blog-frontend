@@ -1,46 +1,112 @@
-# Getting Started with Create React App
+# Blog Project Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A **React** **TypeScript** frontend for a blog project using custom blog [API](https://github.com/Tynasello/blog-api).
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+[Live Demo](https://tynasello.github.io/blog-frontend/)
 
-### `npm start`
+I previosuly built a REST API for creating custom blogs. This project is an example frontend that shows how the API can be utilized.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Any veiwer can observe posts and create comments. Users who log in with correct admin username and password are granted additional privileges.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To be admin of this blog, login with username: "**admin**" and password: "**adminpass**". This will allow you the ability to create, edit, and delete blog posts, aswell as delete post comments.
 
-### `npm test`
+## src Folder Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+./src
+├── App.tsx
+├── Routes.tsx
+├── components
+|  ├── Admin
+|  |  ├── Post.tsx
+|  |  └── PostPreview.tsx
+|  ├── Nav.tsx
+|  ├── Public
+|  |  ├── Post.tsx
+|  |  └── PostPreview.tsx
+|  └── Utils
+|     ├── Button.tsx
+|     ├── Form.tsx
+|     ├── Input.tsx
+|     ├── Modal.tsx
+|     ├── ModalContainer.tsx
+|     └── TextInput.tsx
+├── index.tsx
+├── pages
+|  ├── Admin
+|  |  └── Posts.tsx
+|  ├── Login.tsx
+|  └── Public
+|     └── Posts.tsx
+├── react-app-env.d.ts
+├── reportWebVitals.ts
+└── theme
+   ├── GlobalStyle.ts
+   └── Theme.ts
+```
 
-### `npm run build`
+## What I've Learned
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> How to use **Typescript** with **React**:
+>
+> - Declaring components and working with interfaces and props.
+> - Using react hooks such as useEffect and useState.
+>
+> How to serve a backend:
+>
+> - Making asynchronous API requests.
+> - Sending data to an API via request body.
+> - Recieving data from an API via repsonse body.
+> - Sending custom HTTP headers to API ('x-access-token' for user auth).
+>
+> How to create a multi-page app with React using pages.
+> How to leverage React routes with HashRouter for gh-pages deployment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To Work on this project:
 
-### `npm run eject`
+Clone project:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+git clone https://github.com/Tynasello/blog-frontend
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Change into project directory:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+cd blog-frontend
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Install required dependencies:
 
-## Learn More
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To run the app in the development mode:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view in browser.
+
+To build the app for production to the build folder:
+
+```bash
+npm run build
+```
+
+## Built With
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [ReactJS](https://reactjs.org/)
+- [styled-components](https://styled-components.com/)
+- [gh-pages](https://pages.github.com/)
+
+## Acknowledgments
+
+Inspiration for this project was found while following the tutorials on [The Odin Project](https://www.theodinproject.com), and advancing to the [NodeJS Project: Blog API](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs/lessons/blog-api) section.
