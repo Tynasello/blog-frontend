@@ -2,6 +2,8 @@
 
 A **React** **TypeScript** frontend for a blog project using custom blog [API](https://github.com/Tynasello/blog-api).
 
+Live Demo -> [https://tynasello.github.io/blog-frontend](https://tynasello.github.io/blog-frontend)
+
 ## Overview
 
 [Live Demo](https://tynasello.github.io/blog-frontend/)
