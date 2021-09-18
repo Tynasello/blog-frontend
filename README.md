@@ -1,6 +1,6 @@
 # Blog Project Frontend
 
-A **React** **TypeScript** frontend for a blog project using custom blog [API](https://github.com/Tynasello/blog-api).
+A **React**-**TypeScript** blog application where users can view and interact with posts. Frontend makes use of custom blog [API](https://github.com/Tynasello/blog-api).
 
 Live Demo -> [https://tynasello.github.io/blog-frontend](https://tynasello.github.io/blog-frontend)
 
@@ -8,11 +8,11 @@ Live Demo -> [https://tynasello.github.io/blog-frontend](https://tynasello.githu
 
 [Live Demo](https://tynasello.github.io/blog-frontend/)
 
-I previosuly built a REST API for creating custom blogs. This project is an example frontend that shows how the API can be utilized.
+I previously built a REST API for creating custom blogs. This project is an example frontend that shows how the API can be used.
 
-Any veiwer can observe posts and create comments. Users who log in with correct admin username and password are granted additional privileges.
+Any viewer can observe posts and create comments. Users who log in with the correct admin username and password are granted additional privileges.
 
-To be admin of this blog, login with username: "**admin**" and password: "**adminpass**". This will allow you the ability to create, edit, and delete blog posts, aswell as delete post comments.
+To be admin of this blog, login with username: "**admin**" and password: "**adminpass**". This will allow you the ability to create, edit, and delete blog posts, as well as delete post comments.
 
 ## src Folder Structure
 
@@ -58,12 +58,13 @@ To be admin of this blog, login with username: "**admin**" and password: "**admi
 >
 > How to serve a backend:
 >
-> - Making asynchronous API requests.
+> - Making asynchronous API requests using JavaScript fetch API.
 > - Sending data to an API via request body.
-> - Recieving data from an API via repsonse body.
+> - Receiving data from an API via response body.
 > - Sending custom HTTP headers to API ('x-access-token' for user auth).
 >
 > How to create a multi-page app with React using pages.
+>
 > How to leverage React routes with HashRouter for gh-pages deployment.
 
 ## Installation
